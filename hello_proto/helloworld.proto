@@ -1,0 +1,7 @@
+syntax = "proto3";
+package hello_proto;
+option go_package = ".;hello_proto";
+
+message HelloRequest {
+  string name = 1; // 1 是编号不是值
+}
