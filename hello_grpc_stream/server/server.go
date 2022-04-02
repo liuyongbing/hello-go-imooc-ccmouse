@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net"
+	"sync"
 	"time"
 
 	"google.golang.org/grpc"
@@ -16,6 +17,7 @@ type Server struct {
 	proto.UnimplementedGreeterServer
 }
 
+// 流模式: 服务端(发送) > 客户端(接收)
 func (s *Server) GetStream(req *proto.StreamReqData, res proto.Greeter_GetStreamServer) error {
 	i := 0
 	for {
@@ -34,6 +36,7 @@ func (s *Server) GetStream(req *proto.StreamReqData, res proto.Greeter_GetStream
 	return nil
 }
 
+// 流模式: 客户端(发送) > 服务端(接收)
 func (s *Server) PutStream(cliStr proto.Greeter_PutStreamServer) error {
 	for {
 		req, err := cliStr.Recv()
@@ -46,7 +49,33 @@ func (s *Server) PutStream(cliStr proto.Greeter_PutStreamServer) error {
 	return nil
 }
 
+// 流模式: 双向流
 func (s *Server) AllStream(allStr proto.Greeter_AllStreamServer) error {
+	// 协程: 开启
+	group := sync.WaitGroup{}
+	group.Add(2)
+
+	// 接收
+	go func() {
+		defer group.Done()
+		for {
+			data, _ := allStr.Recv()
+			fmt.Println("双向流(服务端接收): ", data.Data)
+		}
+	}()
+
+	// 发送
+	go func() {
+		defer group.Done()
+		for {
+			_ = allStr.Send(&proto.StreamResData{
+				Data: fmt.Sprintf("双向流(服务端发送): %v", time.Now().Unix()),
+			})
+			time.Sleep(time.Second)
+		}
+	}()
+
+	group.Wait()
 
 	return nil
 }
