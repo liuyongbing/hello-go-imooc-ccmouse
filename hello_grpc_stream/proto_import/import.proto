@@ -3,7 +3,7 @@ syntax = "proto3";
 import "github.com/liuyongbing/hello-go-imooc-ccmouse/hello_proto/base.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = ".;p
+option go_package = ".;proto";
 
 service ProtoImport {
   rpc SayHello (HelloRequest) returns (HelloReply);
