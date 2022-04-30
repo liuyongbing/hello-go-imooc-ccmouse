@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "github.com/liuyongbing/hello-go-imooc-ccmouse/hello_proto/base.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = ".;p
+
+service ProtoImport {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+
+//  rpc Ping(Empty) returns (Pong);
+  rpc Ping(google.protobuf.Empty) returns (Pong);
+}
+
+message HelloRequest {
+  string url = 1;
+  string name = 2;
+}
+
+message HelloReply {
+  string message = 1;
+}
