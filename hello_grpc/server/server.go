@@ -15,7 +15,7 @@ type Server struct {
 
 func (s *Server) SayHello(ctx context.Context, request *proto.HelloRequest) (*proto.HelloReply, error) {
 	return &proto.HelloReply{
-		Message: "Hello, demo of grpc." + request.Name,
+		Message: "Hello, demo of grpc. Name:" + request.Name + " Url:" + request.Url + " Gender:" + request.Gender.String(),
 	}, nil
 }
 

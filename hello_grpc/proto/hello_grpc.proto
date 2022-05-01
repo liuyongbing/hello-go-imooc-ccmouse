@@ -6,8 +6,15 @@ service Greeter {
   rpc SayHello(HelloRequest) returns (HelloReply) {}
 }
 
+enum GenderEnum {
+  MALE = 0;
+  FEMALE = 1;
+}
+
 message HelloRequest {
   string name = 1;
+  string url = 2;
+  GenderEnum gender = 3;
 }
 
 message HelloReply {

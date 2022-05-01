@@ -17,7 +17,11 @@ func main() {
 	defer conn.Close()
 
 	cli := proto.NewGreeterClient(conn)
-	rsp, err := cli.SayHello(context.Background(), &proto.HelloRequest{Name: "Grpc service"})
+	rsp, err := cli.SayHello(context.Background(), &proto.HelloRequest{
+		Name:   "Grpc service",
+		Url:    "http://keyi.art",
+		Gender: proto.GenderEnum_MALE,
+	})
 	if err != nil {
 		panic(err)
 	}
