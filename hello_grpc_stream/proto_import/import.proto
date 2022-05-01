@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-//import "base.proto";
-import "github.com/liuyongbing/hello-go-imooc-ccmouse/hello_proto/base.proto";
+import "base.proto";
+//import "github.com/liuyongbing/hello-go-imooc-ccmouse/hello_proto/base.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = ".;proto";
+option go_package = ".;proto_import";
 
 service ProtoImport {
   rpc SayHello (HelloRequest) returns (HelloReply);
