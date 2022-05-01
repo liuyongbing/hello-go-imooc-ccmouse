@@ -2,12 +2,13 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.13.0
-// source: proto_import/import.proto
+// source: import.proto
 
 package proto
 
 import (
 	context "context"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -23,7 +24,9 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProtoImportClient interface {
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
-	Ping(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Pong, error)
+	//  使用 google.protobuf.Empty 代替
+	//  rpc Ping(Empty) returns (Pong);
+	Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*Pong, error)
 }
 
 type protoImportClient struct {
@@ -43,7 +46,7 @@ func (c *protoImportClient) SayHello(ctx context.Context, in *HelloRequest, opts
 	return out, nil
 }
 
-func (c *protoImportClient) Ping(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Pong, error) {
+func (c *protoImportClient) Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*Pong, error) {
 	out := new(Pong)
 	err := c.cc.Invoke(ctx, "/ProtoImport/Ping", in, out, opts...)
 	if err != nil {
@@ -57,7 +60,9 @@ func (c *protoImportClient) Ping(ctx context.Context, in *Empty, opts ...grpc.Ca
 // for forward compatibility
 type ProtoImportServer interface {
 	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
-	Ping(context.Context, *Empty) (*Pong, error)
+	//  使用 google.protobuf.Empty 代替
+	//  rpc Ping(Empty) returns (Pong);
+	Ping(context.Context, *empty.Empty) (*Pong, error)
 	mustEmbedUnimplementedProtoImportServer()
 }
 
@@ -68,7 +73,7 @@ type UnimplementedProtoImportServer struct {
 func (UnimplementedProtoImportServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
 }
-func (UnimplementedProtoImportServer) Ping(context.Context, *Empty) (*Pong, error) {
+func (UnimplementedProtoImportServer) Ping(context.Context, *empty.Empty) (*Pong, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
 func (UnimplementedProtoImportServer) mustEmbedUnimplementedProtoImportServer() {}
@@ -103,7 +108,7 @@ func _ProtoImport_SayHello_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _ProtoImport_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -115,7 +120,7 @@ func _ProtoImport_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/ProtoImport/Ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProtoImportServer).Ping(ctx, req.(*Empty))
+		return srv.(ProtoImportServer).Ping(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -137,5 +142,5 @@ var ProtoImport_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto_import/import.proto",
+	Metadata: "import.proto",
 }

@@ -1,5 +1,10 @@
 syntax = "proto3";
 
+option go_package = ".;proto";
+
 message Pong {
   string id = 1;
 }
+
+// 使用 google/protobuf/empty.proto 代替
+//message Empty{}
