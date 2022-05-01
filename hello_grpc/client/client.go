@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"google.golang.org/grpc"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 
 	"github.com/liuyongbing/hello-go-imooc-ccmouse/hello_grpc/proto"
 )
@@ -25,6 +27,7 @@ func main() {
 			"name":    "proto of map",
 			"company": "imooc.com",
 		},
+		AddTime: timestamppb.New(time.Now()),
 	})
 	if err != nil {
 		panic(err)
