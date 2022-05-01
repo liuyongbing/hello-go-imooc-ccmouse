@@ -21,6 +21,10 @@ func main() {
 		Name:   "Grpc service",
 		Url:    "http://keyi.art",
 		Gender: proto.GenderEnum_MALE,
+		Mp: map[string]string{
+			"name":    "proto of map",
+			"company": "imooc.com",
+		},
 	})
 	if err != nil {
 		panic(err)

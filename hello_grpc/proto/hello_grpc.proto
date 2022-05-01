@@ -15,6 +15,7 @@ message HelloRequest {
   string name = 1;
   string url = 2;
   GenderEnum gender = 3;
+  map<string, string> mp = 4;
 }
 
 message HelloReply {
