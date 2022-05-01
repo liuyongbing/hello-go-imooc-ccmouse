@@ -24,4 +24,11 @@ message HelloRequest {
 
 message HelloReply {
   string message = 1;
+
+  message Result {
+    string url = 1;
+    string name = 2;
+  }
+
+  repeated Result data = 2;
 }

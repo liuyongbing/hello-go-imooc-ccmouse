@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/liuyongbing/hello-go-imooc-ccmouse/hello_grpc_stream/proto"
+	"github.com/liuyongbing/hello-go-imooc-ccmouse/hello_grpc_stream/proto_import"
 	"google.golang.org/grpc"
 )
 
@@ -26,6 +27,24 @@ func main() {
 	// 流模式: 双向流
 	CliAllStream(conn)
 
+	// ProtoImport
+	//ProtoImport(conn)
+}
+
+func ProtoImport(conn *grpc.ClientConn) {
+
+	//proto_import.HelloReply_Result{}
+	pong := proto_import.Pong{
+		Id: "proto_import.pong.id",
+	}
+
+	replyResult := proto_import.HelloReply_Result{
+		Name: "proto_import.result.name",
+		Url:  "proto_import.result.url",
+	}
+
+	fmt.Println(&pong)
+	fmt.Println(&replyResult)
 }
 
 func CliAllStream(conn *grpc.ClientConn) {
