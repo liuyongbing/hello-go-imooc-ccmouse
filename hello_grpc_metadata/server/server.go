@@ -18,14 +18,14 @@ type Server struct {
 
 func (s *Server) SayHello(ctx context.Context, request *protoMetadata.HelloRequest) (*protoMetadata.HelloReply, error) {
 	md, ok := metadata.FromIncomingContext(ctx)
-	if ok != true {
+	if !ok {
 		fmt.Println("get grpc metadata error")
 	}
 	//for key, val := range md {
 	//	fmt.Println(key, val)
 	//}
 	nameSlice, ok := md["name"]
-	if ok != true {
+	if !ok {
 		fmt.Println("No md[name]")
 	}
 	fmt.Println("Server incoming metadata:")
