@@ -1,0 +1,15 @@
+{
+    "registry-mirrors": [
+        "https://iesm1ecb.mirror.aliyuncs.com"
+    ],
+    "builder": {
+        "gc": {
+            "defaultKeepStorage": "20GB",
+            "enabled": true
+        }
+    },
+    "experimental": false,
+    "features": {
+        "buildkit": true
+    }
+}
