@@ -1,6 +1,8 @@
 package main
 
 import (
+	"database/sql"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -10,9 +12,16 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-type GormFiledsTag struct {
-	UserID uint   `gorm:"primarykey"`
-	Name   string `gorm:"column:user_name;type:varchar(50);index:idx_user_name;unique"`
+type User struct {
+	ID           uint
+	Name         string
+	Email        *string
+	Age          uint8
+	Birthday     *time.Time
+	MemberNumber sql.NullString
+	ActivatedAt  sql.NullTime
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 func main() {
@@ -35,8 +44,16 @@ func main() {
 		panic(err)
 	}
 
-	db.AutoMigrate(&GormFiledsTag{})
+	db.AutoMigrate(&User{})
 
 	// Create
-	db.Create(&GormFiledsTag{})
+	email := "hello@keyi.art"
+	user := User{
+		Name:  "www.keyi.art",
+		Email: &email,
+	}
+	result := db.Create(&user)
+	fmt.Println(user.ID)
+	fmt.Println(result.Error)
+	fmt.Println(result.RowsAffected)
 }
