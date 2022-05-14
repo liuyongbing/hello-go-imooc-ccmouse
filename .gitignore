@@ -15,3 +15,6 @@
 # vendor/
 
 runtime/git_task/taskFile.txt
+
+# VSCode
+__debug_bin
