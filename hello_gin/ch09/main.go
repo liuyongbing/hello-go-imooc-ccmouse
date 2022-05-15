@@ -16,7 +16,7 @@ func main() {
 	//为什么我们通过goland运行main.go的时候并没有生成main.exe文件
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 	fmt.Println(dir)
-	//router.Static("/static", "./static")
+	router.Static("/static", "./static")
 	router.LoadHTMLGlob("templates/**/*")
 	//router.LoadHTMLFiles("templates/index.tmpl", "templates/goods.html")
 
