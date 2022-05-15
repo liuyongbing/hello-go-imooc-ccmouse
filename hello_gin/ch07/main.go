@@ -12,8 +12,8 @@ import (
 	"github.com/go-playground/locales/zh"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
-	en_translations "github.com/go-playground/validator/v10/translations/en"
-	zh_translations "github.com/go-playground/validator/v10/translations/zh"
+	enTranslations "github.com/go-playground/validator/v10/translations/en"
+	zhTranslations "github.com/go-playground/validator/v10/translations/zh"
 )
 
 var trans ut.Translator
@@ -39,9 +39,7 @@ func removeTopStruct(fileds map[string]string) map[string]string {
 	return rsp
 }
 
-/*
-注册翻译器
-*/
+// InitTrans 翻译器初始化
 func InitTrans(locale string) (err error) {
 	//修改gin框架中的validator引擎属性, 实现定制
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
@@ -65,11 +63,11 @@ func InitTrans(locale string) (err error) {
 
 		switch locale {
 		case "en":
-			en_translations.RegisterDefaultTranslations(v, trans)
+			enTranslations.RegisterDefaultTranslations(v, trans)
 		case "zh":
-			zh_translations.RegisterDefaultTranslations(v, trans)
+			zhTranslations.RegisterDefaultTranslations(v, trans)
 		default:
-			en_translations.RegisterDefaultTranslations(v, trans)
+			enTranslations.RegisterDefaultTranslations(v, trans)
 		}
 		return
 	}
