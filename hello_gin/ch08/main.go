@@ -27,13 +27,14 @@ func MyLogger() gin.HandlerFunc {
 func Hook404() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		c.Next()
 		status := c.Writer.Status()
 		if status == 404 {
 			c.JSON(http.StatusOK, gin.H{
 				"msg": "页面找不到",
 			})
 		}
+		//c.Abort()
+		c.Next()
 	}
 }
 
