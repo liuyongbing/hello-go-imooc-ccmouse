@@ -29,6 +29,6 @@ func main() {
 	// router.OPTIONS("/someOptions", options)
 
 	// 默认启动的是 8080端口，也可以自己定义启动端口
-	router.Run(":8002")
+	router.Run(":8082")
 	// router.Run(":3000") for a hard coded port
 }
