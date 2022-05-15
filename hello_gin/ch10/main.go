@@ -29,7 +29,7 @@ func main() {
 
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	<--quit
+	<-quit
 
 	fmt.Println("Server关闭中。。。")
 	fmt.Println("服务注销中。。。")
