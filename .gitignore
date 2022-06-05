@@ -16,8 +16,11 @@
 
 runtime/git_task/taskFile.txt
 
-# VSCode
+# VSCode debug
 __debug_bin
 
 # go build
 main
+
+# demo of json
+demo.json
