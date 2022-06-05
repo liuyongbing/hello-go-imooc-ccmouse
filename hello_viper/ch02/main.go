@@ -36,11 +36,11 @@ func main() {
 	fmt.Println(v.Get("name"))
 
 	// 将配置文件内容映射到 配置 struct
-	sererConfig := structure.ServerConfig{}
-	if err := v.Unmarshal(&sererConfig); err != nil {
+	serverConfig := structure.ServerConfig{}
+	if err := v.Unmarshal(&serverConfig); err != nil {
 		panic(err)
 	}
-	fmt.Println(sererConfig)
+	fmt.Println(serverConfig)
 	fmt.Printf("%V", v.Get("name"))
 	fmt.Println("")
 
@@ -49,8 +49,8 @@ func main() {
 	v.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("Config file channed:", e.Name)
 		v.ReadInConfig()
-		v.Unmarshal(&sererConfig)
-		fmt.Println(sererConfig)
+		v.Unmarshal(&serverConfig)
+		fmt.Println(serverConfig)
 	})
 
 	time.Sleep(time.Second * 100)
