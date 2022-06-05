@@ -4,16 +4,13 @@ import (
 	"fmt"
 
 	"github.com/spf13/viper"
-)
 
-type ServerConfig struct {
-	ServiceName string `mapstructure:"name"`
-	Port        int    `mapstructure:"port"`
-}
+	"github.com/liuyongbing/hello-go-imooc-ccmouse/hello_viper/structure"
+)
 
 func main() {
 	v := viper.New()
-	v.SetConfigFile("config.yaml")
+	v.SetConfigFile("../config.yaml")
 
 	// 读取配置文件内容
 	if err := v.ReadInConfig(); err != nil {
@@ -22,7 +19,7 @@ func main() {
 	fmt.Println(v.Get("name"))
 
 	// 将配置文件内容映射到 配置 struct
-	sererConfig := ServerConfig{}
+	sererConfig := structure.ServerConfig{}
 	if err := v.Unmarshal(&sererConfig); err != nil {
 		panic(err)
 	}
