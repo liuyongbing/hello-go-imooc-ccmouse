@@ -7,7 +7,8 @@ import (
 )
 
 /*
-Register 服务注册
+Register
+服务注册
 */
 func Register(addr string, port int, name string, tags []string, id string) {
 	cfg := api.DefaultConfig()
@@ -44,7 +45,8 @@ func Register(addr string, port int, name string, tags []string, id string) {
 }
 
 /*
-AllServices 发现服务
+AllServices
+发现服务(所有)
 */
 func AllServices() {
 	cfg := api.DefaultConfig()
@@ -66,7 +68,8 @@ func AllServices() {
 }
 
 /*
-FilterServices 发现服务
+FilterServices
+发现服务(筛选)
 */
 func FilterServices() {
 	cfg := api.DefaultConfig()
