@@ -24,3 +24,6 @@ main
 
 # demo of json
 demo.json
+
+# tmp file
+tmp/

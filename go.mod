@@ -11,6 +11,7 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1
 	github.com/golang/protobuf v1.5.2
 	github.com/hashicorp/consul/api v1.13.0
+	github.com/nacos-group/nacos-sdk-go v1.1.1
 	github.com/spf13/viper v1.12.0
 	google.golang.org/grpc v1.47.0
 	google.golang.org/protobuf v1.28.0
