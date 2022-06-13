@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"time"
 
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
+
+	"github.com/liuyongbing/hello-go-imooc-ccmouse/hello_nacos/config"
 )
 
 func main() {
@@ -46,19 +48,25 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Println("Nacos 原始配置内容：")
 	fmt.Println(configInfo)
 
-	// 监听 Nacos 配置信息变化
-	err = nacosClient.ListenConfig(vo.ConfigParam{
-		DataId: "user-web",
-		Group:  "dev",
-		OnChange: func(namespace, group, dataId, data string) {
-			fmt.Println("配置文件变化")
-		},
-	})
-	if err != nil {
-		panic(err)
-	}
+	serverConfig := config.ServerConfig{}
+	json.Unmarshal([]byte(configInfo), &serverConfig)
 
-	time.Sleep(time.Second * 20)
+	fmt.Println("本地转换后内容：")
+	fmt.Println(serverConfig)
+
+	// 监听 Nacos 配置信息变化
+	// err = nacosClient.ListenConfig(vo.ConfigParam{
+	// 	DataId: "user-web",
+	// 	Group:  "dev",
+	// 	OnChange: func(namespace, group, dataId, data string) {
+	// 		fmt.Println("配置文件变化")
+	// 	},
+	// })
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// time.Sleep(time.Second * 20)
 }
